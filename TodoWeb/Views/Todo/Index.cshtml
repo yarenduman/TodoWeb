@@ -1,4 +1,4 @@
-﻿@model IEnumerable<TodoWeb.Models.TodoItem>
+﻿@model SearchViewModel
 
 @{
     ViewData["Title"] = "Index";
@@ -10,7 +10,7 @@
     <a asp-action="Create">Add a new task</a>
 </p>
 <p>
-    @if (ViewBag.ShowAll)
+    @if (Model.ShowAll)
     {
         <a asp-action="Index" asp-route-showall="false">Show Only Incompletes</a>
 
@@ -22,24 +22,25 @@
     }
 </p>
 
+
 <table class="table">
     <thead>
         <tr>
 
             <th>
-                @Html.DisplayNameFor(model => model.Title)
+                Title
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Category)
+                Category
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.DueDate)
+                Due Date
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.RemainingHour)
+               Remaining Hour
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.IsCompleted)
+                Is Completed
             </th>
 
 
@@ -47,7 +48,7 @@
         </tr>
     </thead>
     <tbody>
-        @foreach (var item in Model)
+        @foreach (var item in Model.Result)
         {
             <tr>
                 <td>
@@ -78,11 +79,11 @@
                 <td>
                     @if (item.IsCompleted)
                     {
-                        <a asp-action="MakeInComplete" asp-route-id="@item.Id"asp-route-showAll="@ViewBag.Showall">Incomplete</a>
+                        <a asp-action="MakeInComplete" asp-route-id="@item.Id"asp-route-showAll="@Model.ShowAll">Incomplete</a>
                     }
                     else
                     {
-                        <a asp-action="MakeComplete" asp-route-id="@item.Id"asp-route-showAll="@ViewBag.Showall">Complete</a>
+                        <a asp-action="MakeComplete" asp-route-id="@item.Id"asp-route-showAll="@Model.ShowAll">Complete</a>
 
                     }
 
