@@ -30,7 +30,7 @@ namespace TodoWeb.Controllers
             }
             if (!String.IsNullOrWhiteSpace(searchModel.SearchText))
             {
-                query = query.Where(t => t.Title.Contains(searchModel.SearchText, StringComparison.OrdinalIgnoreCase));
+                query = query.Where(t => t.Title.Contains(searchModel.SearchText));
             }
 
             query = query.OrderBy(t => t.DueDate); 

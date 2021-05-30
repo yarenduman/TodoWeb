@@ -47,11 +47,6 @@ namespace TodoWeb.Models
         public int CategoryId { get; set; }
 
         public virtual Category Category { get; set; }
-        
-
-        
-        //public string CetUserId { get; set; }
-        //public virtual CetUser CetUser { get; set; }
     }
 }
    
