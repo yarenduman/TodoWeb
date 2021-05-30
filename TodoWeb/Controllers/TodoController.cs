@@ -20,10 +20,16 @@ namespace TodoWeb.Controllers
         }
 
         // GET: Todo
-        public async Task<IActionResult> Index()
+        public async Task<IActionResult> Index(bool showall = false)
         {
-            var applicationDbContext = _context.TodoItems.Include(t => t.Category);
+            ViewBag.Showall = showall;
+            var applicationDbContext = _context.TodoItems.Include(t => t.Category).AsQueryable();
+            if(!showall){
+                applicationDbContext = applicationDbContext.Where(t => !t.IsCompleted);
+            }
+            applicationDbContext = applicationDbContext.OrderBy(t => t.DueDate);
             return View(await applicationDbContext.ToListAsync());
+
         }
 
         // GET: Todo/Details/5
